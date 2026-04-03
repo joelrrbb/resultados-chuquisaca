@@ -178,7 +178,10 @@ await actualizarCapas(map, v.mapa.estilo, capas, {
   hover: { recintos_hover: "recintos" },
 });
 
-const chuquisaca = await FileAttachment("data/chuquisaca.geojson").json();
+
+const RAW_URL = "https://raw.githubusercontent.com/joelrrbb/resultados-chuquisaca/main/src/data/";
+const chuquisaca = await d3.json(`${RAW_URL}chuquisaca.geojson`);
+
 map.addSource("chuquisaca-border", {
   type: "geojson",
   data: chuquisaca,
@@ -207,13 +210,9 @@ actualizarCSS(v.colores);
 
 ```js
 // Cargar datos
-//const gh = `https://raw.githubusercontent.com/datosbolivia/elecciones2025/refs/heads/main/${vueltas_folder[vuelta]}`;
-
-const recintos = await FileAttachment("data/recintos.geojson").json();
-const resultados = await FileAttachment("data/resultado.json").json();
-//const recintos = await d3.json(`${gh}recintos.geojson`);
-//const resultados = await d3.json(`${gh}resultados.json`);
-
+// 2. Cargamos los datos usando d3.json para permitir peticiones externas
+const recintos = await d3.json(`${RAW_URL}recintos.geojson`);
+const resultados = await d3.json(`${RAW_URL}resultado.json`);
 
 ```
 
